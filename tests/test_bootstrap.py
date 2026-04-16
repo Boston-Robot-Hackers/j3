@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 
 
-J3_DIR = Path(__file__).parent.parent / ".j3"
+J3_DIR = Path(__file__).parent.parent / ".claude"
 
 EXPECTED_FILES = [
     "CLAUDE.md",
@@ -33,7 +33,7 @@ EXPECTED_DIRS = [
 @pytest.fixture()
 def bootstrapped_project():
     tmp = Path(tempfile.mkdtemp())
-    shutil.copytree(J3_DIR, tmp / ".j3")
+    shutil.copytree(J3_DIR, tmp / ".claude")
     _scaffold(tmp)
     yield tmp
     shutil.rmtree(tmp)
@@ -43,36 +43,38 @@ def _scaffold(root: Path):
     for d in EXPECTED_DIRS:
         (root / d).mkdir(parents=True, exist_ok=True)
 
+    templates = J3_DIR / "templates"
     (root / "CLAUDE.md").write_text(
-        (J3_DIR / "CLAUDE.md.template").read_text()
+        (templates / "CLAUDE.md.template").read_text()
     )
     (root / "process/spec.md").write_text(
         "# Spec for <APP NAME>\n* <Describe what the app does>\n"
     )
     (root / "process/features/template.md").write_text(
-        (J3_DIR / "bootstrap.md").read_text()
+        (J3_DIR / "templates" / "feature-template.md").read_text()
     )
     (root / "process/tasks/template.md").write_text(
-        (J3_DIR / "bootstrap.md").read_text()
+        (J3_DIR / "templates" / "task_template.md").read_text()
     )
     (root / "LICENSE").write_text(
-        (J3_DIR / "LICENSE.template").read_text()
+        (templates / "LICENSE.template").read_text()
     )
     (root / "README.md").write_text(
-        (J3_DIR / "README.md.template").read_text()
+        (templates / "README.md.template").read_text()
     )
     (root / ".gitignore").write_text(
-        (J3_DIR / ".gitignore.template").read_text()
+        (templates / ".gitignore.template").read_text()
     )
 
 
 def test_j3_dir_is_present(bootstrapped_project):
-    assert (bootstrapped_project / ".j3").is_dir()
+    assert (bootstrapped_project / ".claude").is_dir()
 
 
 def test_j3_required_files_exist(bootstrapped_project):
-    for name in ["method.md", "coding.md", "bootstrap.md", "CLAUDE.md.template"]:
-        assert (bootstrapped_project / ".j3" / name).exists(), f"Missing .j3/{name}"
+    for name in ["method.md", "coding.md", "bootstrap.md"]:
+        assert (bootstrapped_project / ".claude" / name).exists(), f"Missing .claude/{name}"
+    assert (bootstrapped_project / ".claude" / "templates" / "CLAUDE.md.template").exists()
 
 
 def test_expected_dirs_created(bootstrapped_project):

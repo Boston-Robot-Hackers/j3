@@ -4,7 +4,10 @@
       "Bash(mkdir:*)",
       "Bash(uv:*)",
       "Bash(git push:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(uv run *)",
+      "Bash(python *)",
+      "Bash(python3 *)"
     ]
   }
 }
