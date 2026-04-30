@@ -12,6 +12,9 @@
 * Use double quotes throughout; single quotes only when specifically required
 * Put all imports at the top of the file
 * Use absolute imports with module aliases rather than relative imports
+* Do not precede private method names or private instance variables with an underscore
+* Do not use `from __future__ import annotations`
+* Do not use `Optional[X]` from `typing` — write `X | None` instead (Python 3.10+) — if a forward reference genuinely requires it, explain why in a comment
 
 ### Structure and organization
 * Functions and methods no longer than 50 lines
