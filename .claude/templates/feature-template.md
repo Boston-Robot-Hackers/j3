@@ -1,5 +1,7 @@
 # Feature description for feature Fxx
-## Fxx — description
+
+Feature file name must be `FNN-<slug>.md` where `NN` matches the feature number.
+# Fxx — description
 **Priority**: High | Medium | Low
 **Done:** yes | no
 **Tasks File Created:** yes | no
