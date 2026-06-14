@@ -1,17 +1,8 @@
 # j3
 
-A portable Claude Code methodology kit. Copy the `.claude/` directory into any project to give Claude a structured, disciplined development process: spec → features → tasks → code → tests.
+Portable Claude Code methodology kit. Drop `.claude/` into any project and Claude gets a structured, disciplined development process: spec → features → tasks → code → tests.
 
-j3 enforces the rule that no code is written without a task, no task without a feature, and no feature without a spec. It also bundles opinionated coding standards, a literate-programming workflow, and slash commands for common operations.
-
-## Why
-
-Claude Code is powerful but undisciplined by default. j3 gives it a repeatable process:
-
-- Every piece of work is traceable from spec → feature → task → code
-- Features are never closed without passing tests
-- Bugs get regression tests automatically
-- Projects are scaffolded consistently and open-source-ready from day one
+**Core rule:** no code without a task, no task without a feature, no feature without a spec.
 
 ## Requirements
 
@@ -20,72 +11,82 @@ Claude Code is powerful but undisciplined by default. j3 gives it a repeatable p
 ## Quickstart
 
 ```bash
-# 1. Clone this repo
 git clone https://github.com/pitosalas/j3.git
-
-# 2. Copy .claude/ into your new (empty) project directory
 cp -r j3/.claude/ myproject/.claude/
-
-# 3. Open your project in Claude Code and say:
-#    "bootstrap this project"
 ```
 
-Claude will scaffold the full folder structure, generate starter files, and prompt you to fill in the spec before any features or code are defined.
+Open your project in Claude Code and say: **"bootstrap this project"**
 
-## What's inside `.claude/`
+Claude scaffolds the folder structure, generates starter files, and blocks you from writing code until a spec and feature exist.
+
+## What's in `.claude/`
 
 | File | Purpose |
 |---|---|
-| `CLAUDE.md` | Entry point — routes Claude to the right instructions on every session start |
-| `bootstrap.md` | Scaffold instructions: creates numbered folder structure, templates, LICENSE, README, .gitignore |
-| `process.md` | Workflow rules: spec → feature → task → code → test discipline |
-| `coding.md` | Python coding standards (style, structure, quality) |
-| `literate.md` | Prompt for generating literate-program Markdown walkthroughs |
-| `commands/newsesh.md` | `/newsesh` slash command — orients Claude at the start of a session |
-| `commands/checkpoint.md` | `/checkpoint` slash command — runs tests, generates docs, commits, pushes |
-| `templates/` | Starter files: LICENSE, README, .gitignore, CLAUDE.md, feature, task, issue templates |
+| `bootstrap.md` | Scaffold instructions — run once on a new project |
+| `how_to_be.md` | Working principles Claude follows every session (auto-loaded via `@`) |
+| `process.md` | Workflow rules: spec → feature → task → code → test |
+| `codereview.md` | Python coding standards, style rules, review checklist (v3.1) |
+| `literate.md` | Generates literate-program Markdown walkthroughs of source files |
+| `commands/start.md` | `/start` — orients Claude at session start |
+| `commands/checkpoint.md` | `/checkpoint` — runs tests, updates docs, commits, pushes |
+| `templates/` | Starter files: LICENSE, README, .gitignore, feature/task/issue templates |
 
 ## Project structure created by bootstrap
 
 ```
-CLAUDE.md                  ← project entry point for Claude
+CLAUDE.md                  ← auto-loads how_to_be, process, codereview every session
 LICENSE
 README.md
 .gitignore
 01-literate/               ← generated literate-program docs
 02-doc/
   spec.md                  ← describe what your app does here
-  current.md               ← session handoff and current status
+  current.md               ← session handoff: what's in progress
   notes.md                 ← architecture decisions, research, gotchas
 03-features/
-  notdone/                 ← features not yet implemented
-  done/                    ← completed features
-  deferred/                ← features parked for later
-  template.md
-04-tasks/
-  notdone/                 ← tasks not yet done
-  done/                    ← completed tasks
+  notdone/                 ← FNN-slug.md mini-specs
+  done/
   deferred/
-  template.md
-05-issues/                 ← bugs and issues not yet converted to features
-  template.md
+04-tasks/
+  notdone/                 ← TFNN-slug.md task files (NN matches feature)
+  done/
+  deferred/
+05-issues/                 ← bugs not yet converted to features
 ```
 
-## The workflow
+## Workflow
 
-1. Write a spec in `02-doc/spec.md`
-2. Ask Claude to define a feature — it creates a file in `03-features/notdone/`
-3. Ask Claude to break the feature into tasks — it creates a task file in `04-tasks/notdone/`
-4. Claude writes code only after tasks are defined
-5. Every feature requires a testing task; feature is only closed when tests pass
-6. Bugs get a regression test before being marked fixed
+1. Fill `02-doc/spec.md` — describe the app
+2. Create feature file `03-features/notdone/F01-slug.md`
+3. Create task file `04-tasks/notdone/TF01-slug.md` (NN matches feature)
+4. Write code, write tests task by task
+5. `/checkpoint` — review, commit, push
+6. When all tasks done → move task file to `done/`, move feature file to `done/`
+
+## Naming conventions
+
+- Features: `FNN-slug.md` (e.g. `F01-add-auth.md`)
+- Tasks: `TFNN-slug.md` where `NN` matches the feature (e.g. `TF01-add-auth.md`)
 
 ## Slash commands
 
 | Command | What it does |
 |---|---|
-| `/newsesh` | Reorients Claude: reads current status and process rules |
+| `/start` | Reads current status, open features, open tasks — orients Claude at session start |
 | `/checkpoint` | Runs tests, regenerates literate docs, commits, pushes |
+
+## Propagating updates to child projects
+
+Projects that copy `.claude/` from j3 will drift over time. When j3 changes, sync key files:
+
+```bash
+cp j3/.claude/codereview.md myproject/.claude/codereview.md
+cp j3/.claude/process.md myproject/.claude/process.md
+cp j3/.claude/how_to_be.md myproject/.claude/how_to_be.md
+cp j3/.claude/templates/feature-template.md myproject/.claude/templates/feature-template.md
+cp j3/.claude/templates/task_template.md myproject/.claude/templates/task_template.md
+```
 
 ## License
 
