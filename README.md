@@ -24,7 +24,6 @@ Claude scaffolds the folder structure, generates starter files, and blocks you f
 | File | Purpose |
 |---|---|
 | `bootstrap.md` | Scaffold instructions — run once on a new project |
-| `how_to_be.md` | Working principles Claude follows every session (auto-loaded via `@`) |
 | `process.md` | Workflow rules: spec → feature → task → code → test |
 | `codereview.md` | Python coding standards, style rules, review checklist (v3.1) |
 | `literate.md` | Generates literate-program Markdown walkthroughs of source files |
@@ -35,7 +34,7 @@ Claude scaffolds the folder structure, generates starter files, and blocks you f
 ## Project structure created by bootstrap
 
 ```
-CLAUDE.md                  ← auto-loads how_to_be, process, codereview every session
+CLAUDE.md                  ← auto-loads process, codereview every session
 LICENSE
 README.md
 .gitignore
@@ -83,7 +82,6 @@ Projects that copy `.claude/` from j3 will drift over time. When j3 changes, syn
 ```bash
 cp j3/.claude/codereview.md myproject/.claude/codereview.md
 cp j3/.claude/process.md myproject/.claude/process.md
-cp j3/.claude/how_to_be.md myproject/.claude/how_to_be.md
 cp j3/.claude/templates/feature-template.md myproject/.claude/templates/feature-template.md
 cp j3/.claude/templates/task_template.md myproject/.claude/templates/task_template.md
 ```
