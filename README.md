@@ -25,7 +25,7 @@ Claude scaffolds the folder structure, generates starter files, and blocks you f
 |---|---|
 | `bootstrap.md` | Scaffold instructions — run once on a new project |
 | `process.md` | Workflow rules: spec → feature → task → code → test |
-| `codereview.md` | Python coding standards, style rules, review checklist (v3.1) |
+| `style_guide.md` | Python coding standards, style rules, review checklist (v4.1) |
 | `literate.md` | Generates literate-program Markdown walkthroughs of source files |
 | `commands/start.md` | `/start` — orients Claude at session start |
 | `commands/checkpoint.md` | `/checkpoint` — runs tests, updates docs, commits, pushes |
@@ -34,7 +34,7 @@ Claude scaffolds the folder structure, generates starter files, and blocks you f
 ## Project structure created by bootstrap
 
 ```
-CLAUDE.md                  ← auto-loads process, codereview every session
+CLAUDE.md                  ← auto-loads process, style_guide every session
 LICENSE
 README.md
 .gitignore
@@ -51,7 +51,12 @@ README.md
   notdone/                 ← TFNN-slug.md task files (NN matches feature)
   done/
   deferred/
-05-issues/                 ← bugs not yet converted to features
+  chores.md                ← running log of simple fixes/refactors
+05-issues/
+  open/                    ← bugs not yet converted to features
+  closed/
+  deferred/
+run.bash                   ← app's run command
 ```
 
 ## Workflow
@@ -80,7 +85,7 @@ README.md
 Projects that copy `.claude/` from j3 will drift over time. When j3 changes, sync key files:
 
 ```bash
-cp j3/.claude/codereview.md myproject/.claude/codereview.md
+cp j3/.claude/style_guide.md myproject/.claude/style_guide.md
 cp j3/.claude/process.md myproject/.claude/process.md
 cp j3/.claude/templates/feature-template.md myproject/.claude/templates/feature-template.md
 cp j3/.claude/templates/task_template.md myproject/.claude/templates/task_template.md

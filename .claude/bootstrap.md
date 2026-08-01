@@ -23,9 +23,14 @@ CLAUDE.md
   notdone/
   done/
   deferred/
+  chores.md
   template.md
 05-issues/
+  open/
+  closed/
+  deferred/
   template.md
+run.bash
 ```
 ### LICENSE
 Copy from `.claude/templates/LICENSE.template` and replace `<YEAR>` and `<AUTHOR NAME>`.
@@ -52,6 +57,9 @@ We are developing an app called <APP NAME>. Literate docs are in `01-literate/`,
 project docs are in `02-doc/`, features are in `03-features/`, tasks are in
 `04-tasks/`, issues are in `05-issues/`, and the spec is in `02-doc/spec.md`.
 ```
+
+### run.bash
+Executable shell script containing the app's run command; set executable with `chmod +x run.bash`.
 
 ## After scaffolding
 
