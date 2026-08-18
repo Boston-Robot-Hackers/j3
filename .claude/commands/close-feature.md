@@ -1,3 +1,6 @@
+---
+allowed-tools: Read Edit Glob Bash(mv *)
+---
 Close out feature: $ARGUMENTS (an `NN` or `FNN`)
 
 1. Find `03-features/notdone/FNN-*.md` and `04-tasks/notdone/TFNN-*.md` for that

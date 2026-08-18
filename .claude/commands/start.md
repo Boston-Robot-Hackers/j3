@@ -1,3 +1,6 @@
+---
+allowed-tools: Read Glob
+---
 To orient for this session do every step listed here:
 
 1. Read and always obey and apply @.claude/style_guide.md and @.claude/process.md

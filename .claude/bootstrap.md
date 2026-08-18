@@ -60,4 +60,6 @@ Prompt the user to:
    starts empty and only grows as work is marked done
 4. Add any durable architecture notes to `02-doc/notes.md`
 5. Replace `<APP NAME>` in `CLAUDE.md`, `README.md`, and `LICENSE` with the actual app name, author, and year
-6. Define the first feature and matching task file before writing any code
+6. Fill in `settings.json`'s `autoMode.environment` block with the real project
+   purpose, package manager, run/test commands, and source control location
+7. Define the first feature and matching task file before writing any code

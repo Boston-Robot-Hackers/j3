@@ -1,3 +1,6 @@
+---
+allowed-tools: Read Write Glob
+---
 Create a new feature and its matching task file for: $ARGUMENTS
 
 1. Read `02-doc/spec.md`. If the request contradicts or isn't covered by the
