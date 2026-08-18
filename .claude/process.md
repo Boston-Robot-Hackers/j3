@@ -16,6 +16,7 @@
 # tasks
 * Full task list before any design/code. `TFNN-<slug>.md` (`NN` matches the feature) in `04-tasks/{notdone,done,deferred}/`; `template.md` shows the format.
 * Every step gets a test where feasible (else record why); every feature gets a dedicated test-writing task.
+* Task lists must never include a "regenerate literate docs" task — literate docs are refreshed later, at checkpoint, not as part of a feature's task list.
 * Last task done → move the task file to `done/`, set the feature's Done/Tests Written/Test Passing to yes, move the feature file to `done/`.
 
 # issues
