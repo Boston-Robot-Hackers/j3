@@ -31,6 +31,8 @@ CLAUDE.md
   closed/
   deferred/
   template.md
+.githooks/
+  pre-commit
 run.bash
 ```
 ### LICENSE
@@ -45,21 +47,40 @@ Copy from `.claude/templates/.gitignore.template` as-is.
 ### CLAUDE.md
 Copy from `.claude/templates/CLAUDE.md.template` and replace `<APP NAME>`.
 
+### .githooks/pre-commit
+Copy from `.claude/templates/pre-commit.template` as-is, then
+`chmod +x .githooks/pre-commit`. It stamps `Version`/`Created`/`Updated` into
+the header of every staged `.py`, as required by the file-header rule in
+`.claude/style_guide.md`.
+
+Git will not use it until the repo is pointed at the directory — see step 1 of
+"After scaffolding". `.git/hooks` is not version controlled, which is why the
+hook is tracked here instead.
+
 ### run.bash
 Executable shell script containing the app's run command; set executable with `chmod +x run.bash`.
 
 ## After scaffolding
 
 Prompt the user to:
-1. Fill in `02-doc/spec.md` with the app description
-2. Initialize `02-doc/current.md` as the session handoff file — keep it to just
+1. Activate the header-stamping hook — a one-time local config, needed once per
+   clone, that nothing else will do automatically:
+
+   ```bash
+   git config core.hooksPath .githooks
+   ```
+
+   Without it the hook is inert and headers silently stop updating, with no
+   error to notice.
+2. Fill in `02-doc/spec.md` with the app description
+3. Initialize `02-doc/current.md` as the session handoff file — keep it to just
    an `## Open` section (what's in progress/next); when work is marked done,
    move that entry out of `current.md` into `02-doc/history.md` rather than
    letting it accumulate in the always-read file
-3. Create `02-doc/history.md` with a one-line header (e.g. "# History") — it
+4. Create `02-doc/history.md` with a one-line header (e.g. "# History") — it
    starts empty and only grows as work is marked done
-4. Add any durable architecture notes to `02-doc/notes.md`
-5. Replace `<APP NAME>` in `CLAUDE.md`, `README.md`, and `LICENSE` with the actual app name, author, and year
-6. Fill in `settings.json`'s `autoMode.environment` block with the real project
+5. Add any durable architecture notes to `02-doc/notes.md`
+6. Replace `<APP NAME>` in `CLAUDE.md`, `README.md`, and `LICENSE` with the actual app name, author, and year
+7. Fill in `settings.json`'s `autoMode.environment` block with the real project
    purpose, package manager, run/test commands, and source control location
-7. Define the first feature and matching task file before writing any code
+8. Define the first feature and matching task file before writing any code

@@ -12,10 +12,12 @@
 # features
 * `FNN-<slug>.md` in `03-features/{notdone,done,deferred}/`; a mini-spec — scope/intent, not task detail.
 * `Tasks File Created: yes` only once a matching `04-tasks/TFNN-*.md` exists. `template.md` shows the format.
+* `Date Created:` in the header, absolute ISO `YYYY-MM-DD`, set when the file is first written and never changed afterwards — not even when the feature moves between `notdone`/`done`/`deferred`.
 
 # tasks
 * Full task list before any design/code. `TFNN-<slug>.md` (`NN` matches the feature) in `04-tasks/{notdone,done,deferred}/`; `template.md` shows the format.
 * Each step is numbered `TFNN.N`, matching the file's own `TFNN` (e.g. `TF03.0`, `TF03.1`, ...), starting at `.0` — not a bare `T0N`.
+* `Date Created:` in the header, absolute ISO `YYYY-MM-DD`, set when the file is first written and never changed afterwards. It is the task file's own creation date, which may be later than its feature's.
 * Every step gets a test where feasible (else record why); every feature gets a dedicated test-writing task.
 * Task lists must never include a "regenerate literate docs" task — literate docs are refreshed later, at checkpoint, not as part of a feature's task list.
 * Last task done → move the task file to `done/`, set the feature's Done/Tests Written/Test Passing to yes, move the feature file to `done/`.
@@ -41,4 +43,8 @@
 # github
 * Literate docs: apply `.claude/literate.md`'s prompt to each changed Python module, save as `01-literate/<module>.md`.
 * Run tests and regenerate literate docs before committing/pushing.
+* File headers stamp themselves: `.githooks/pre-commit` sets `Version`/`Created`/`Updated` on every staged `.py`. Never hand-edit those three fields — see the file-header rule in `.claude/style_guide.md`.
+* The hook is only active once per clone: `git config core.hooksPath .githooks`. Without it headers silently stop updating, so check it after cloning.
+* **No pull requests.** Single-developer repo: run the tests, commit, push. No review branch, no PR.
+* That sequence belongs to `/checkpoint`, which runs tests and ruff, updates `current.md`, refreshes changed literate docs, then commits and pushes. Prefer it over doing the steps by hand.
 * Commit or push only when asked, with a good message.
