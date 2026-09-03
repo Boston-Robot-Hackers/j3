@@ -9,6 +9,7 @@ LICENSE
 README.md
 .gitignore
 CLAUDE.md
+Makefile
 01-literate/
 02-doc/
   spec.md
@@ -47,6 +48,16 @@ Copy from `.claude/templates/.gitignore.template` as-is.
 ### CLAUDE.md
 Copy from `.claude/templates/CLAUDE.md.template` and replace `<APP NAME>`.
 
+### Makefile
+Copy from `.claude/templates/Makefile.template` and replace `<APP NAME>` in
+the header comment. Provides `make setup|fmt|lint|test|check|run` as the
+standard entrypoints — `setup` runs `uv sync`, `test` runs `uv run pytest`,
+`fmt`/`lint` run `uv run ruff` scoped to changed files only (see the
+template's own header for why), `check` is `fmt`+`lint`+`test`, and `run`
+execs `./run.bash`. README.md.template and CLAUDE.md.template both point
+here rather than spelling out raw commands, so this is the one place the
+actual invocations live.
+
 ### .githooks/pre-commit
 Copy from `.claude/templates/pre-commit.template` as-is, then
 `chmod +x .githooks/pre-commit`. It stamps `Version`/`Created`/`Updated` into
@@ -80,7 +91,9 @@ Prompt the user to:
 4. Create `02-doc/history.md` with a one-line header (e.g. "# History") — it
    starts empty and only grows as work is marked done
 5. Add any durable architecture notes to `02-doc/notes.md`
-6. Replace `<APP NAME>` in `CLAUDE.md`, `README.md`, and `LICENSE` with the actual app name, author, and year
+6. Replace `<APP NAME>` in `CLAUDE.md`, `README.md`, `Makefile`, and `LICENSE`
+   with the actual app name, author, and year
 7. Fill in `settings.json`'s `autoMode.environment` block with the real project
-   purpose, package manager, run/test commands, and source control location
+   purpose, package manager, the `make test`/`make run` commands, and source
+   control location
 8. Define the first feature and matching task file before writing any code

@@ -1,10 +1,12 @@
 # General
 * No code without a task; no task without a feature; no feature contradicting the spec.
 * After creating a feature + task file, stop and present the plan — no code until approved.
+* An unapproved feature parked after that stop does not block unrelated work elsewhere in the project — it just sits in `notdone/` until it's explicitly picked up.
 * Don't close a feature until its full test suite exists and passes.
 * Exception: simple bug fixes/refactors (no spec/behavior change) skip the feature/task pair — log as a chore.
 * Any bug fix or regression gets a test.
 * Switching between task/feature/chore: stop and ask permission first.
+* Fix visible, low-risk follow-on inconsistencies from a change in the same pass — an unfilled template placeholder, a stale cross-reference, mismatched numbering — rather than pausing to ask permission for each one separately.
 
 # chores
 * One running file, `04-tasks/chores.md`: `- [ ] <what and why>` → `- [x]` when applied.
@@ -21,6 +23,7 @@
 * Every step gets a test where feasible (else record why); every feature gets a dedicated test-writing task.
 * Task lists must never include a "regenerate literate docs" task — literate docs are refreshed later, at checkpoint, not as part of a feature's task list.
 * Last task done → move the task file to `done/`, set the feature's Done/Tests Written/Test Passing to yes, move the feature file to `done/`.
+* A repo-wide convention change (a new required header field, a renumbering scheme) applies retroactively to `done/`-archived feature and task files too, not just active `notdone/` ones, so the whole history stays on one convention.
 
 # issues
 * `05-issues/{open,closed,deferred}/`, numbered, follow the template.
@@ -30,6 +33,7 @@
 * Applies to `03-features/`, `04-tasks/`, `05-issues/`, and any hand-written doc — not `01-literate/` (own prompt in `literate.md`).
 * Blank line between paragraphs, always. Short paragraphs; bullets for anything enumerable; **bold** for key decisions; *italics* for emphasis or naming a pattern. Several short, headed subsections beat one block.
 * Applies every time a file is rewritten, not just on first authoring.
+* Applies everywhere I write markdown in this project, even if this project's own copy of `.claude/` predates or omits a rule the canonical `j3` kit has since gained — a stale local copy is not license to write worse markdown.
 
 # agent model selection
 * Default subagent dispatch to haiku; upgrade only when the task needs judgment, not just data-gathering.
@@ -39,6 +43,8 @@
 
 # bootstrap
 * `.claude/bootstrap.md` is the scaffold spec. Run `/bootstrap` to bootstrap a new project — don't follow it ad hoc from a mention in conversation.
+* Never copy `settings.local.json` when copying `.claude/` into a new project — it's machine-local and gitignored, and its permission entries (paths, per-machine allowances) don't generalize.
+* If a project's `.claude/` predates the canonical `j3` kit's current state, flag it as stale and offer to sync, rather than silently working from the old copy.
 
 # github
 * Literate docs: apply `.claude/literate.md`'s prompt to each changed Python module, save as `01-literate/<module>.md`.
