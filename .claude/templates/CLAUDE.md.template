@@ -17,6 +17,15 @@ We are developing an app called <APP NAME>. Literate docs are in `01-literate/`,
 project docs are in `02-doc/`, features are in `03-features/`, tasks are in
 `04-tasks/`, issues are in `05-issues/`, and the spec is in `02-doc/spec.md`.
 
+<<<<<<< HEAD
+=======
+## Commands
+
+Run from the repo root: `make setup`, `make test`, `make fmt`/`make lint`
+(ruff, scoped to changed files only — never the whole repo), `make check`
+(fmt+lint+test), `make run`. See the `Makefile` for what each actually runs.
+
+>>>>>>> 185866459d000dfcdb84b454c288ee96f2c23bdd
 ## Session Start
 
 At session start, read `02-doc/current.md`'s `## Open` section for status and
