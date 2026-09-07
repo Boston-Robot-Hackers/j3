@@ -1,3 +1,6 @@
+---
+description: Orient for this session — read context, summarize open work, wait for approval
+---
 To orient for this session:
 
 1. Read and always obey and apply @.claude/style_guide.md
