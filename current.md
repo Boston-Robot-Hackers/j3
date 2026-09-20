@@ -1,7 +1,8 @@
 # Current — j3
 
-## Goal
+## Status
 
+<<<<<<< HEAD
 Keep `j3/.claude` fully self-contained: copy `.claude/` into any project's
 top-level folder, run `/bootstrap` inside Claude Code, and the project is
 immediately functional with the full spec → feature → task → code → test
@@ -28,3 +29,13 @@ methodology — no submodule, no extra wiring, no manual reconciliation step.
   the process is: re-copy `.claude/` wholesale from j3, then manually re-apply
   that project's own `settings.json` permissions/`autoMode` block (these are
   project-specific and not part of the generic kit).
+=======
+Nothing in progress.
+
+## Considered and dropped
+
+Turning `j3/.claude` into a git submodule, consumed by other projects instead
+of copied and reconciled by hand, was explored and rejected.
+
+No further action planned here.
+>>>>>>> f8ba6a59326580877fae7b0145f2db3cab7929b2

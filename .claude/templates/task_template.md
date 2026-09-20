@@ -1,4 +1,5 @@
 # TFxx Description for Feature Fxx
+**Date Created:** YYYY-MM-DD
 
 Task file name must be `TFNN-<slug>.md` where `NN` matches the feature number.
 Each step is numbered `TFNN.N`, matching this file's own `TFNN` identifier

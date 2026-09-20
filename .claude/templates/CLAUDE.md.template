@@ -20,6 +20,12 @@ We are developing an app called <APP NAME>. All process files live under
 `process/04-tasks/`, issues in `process/05-issues/`, and the spec at
 `process/02-doc/spec.md`.
 
+## Commands
+
+Run from the repo root: `make setup`, `make test`, `make fmt`/`make lint`
+(ruff, scoped to changed files only — never the whole repo), `make check`
+(fmt+lint+test), `make run`. See the `Makefile` for what each actually runs.
+
 ## Session Start
 
 At session start, read `process/02-doc/current.md`'s `## Open` section for status and
