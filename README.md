@@ -38,32 +38,33 @@ CLAUDE.md                  ← auto-loads process, style_guide every session
 LICENSE
 README.md
 .gitignore
-01-literate/               ← generated literate-program docs
-02-doc/
-  spec.md                  ← describe what your app does here
-  current.md               ← session handoff: what's in progress
-  notes.md                 ← architecture decisions, research, gotchas
-03-features/
-  notdone/                 ← FNN-slug.md mini-specs
-  done/
-  deferred/
-04-tasks/
-  notdone/                 ← TFNN-slug.md task files (NN matches feature)
-  done/
-  deferred/
-  chores.md                ← running log of simple fixes/refactors
-05-issues/
-  open/                    ← bugs not yet converted to features
-  closed/
-  deferred/
+process/
+  01-literate/             ← generated literate-program docs
+  02-doc/
+    spec.md                ← describe what your app does here
+    current.md             ← session handoff: what's in progress
+    notes.md               ← architecture decisions, research, gotchas
+  03-features/
+    notdone/               ← FNN-slug.md mini-specs
+    done/
+    deferred/
+  04-tasks/
+    notdone/               ← TFNN-slug.md task files (NN matches feature)
+    done/
+    deferred/
+    chores.md              ← running log of simple fixes/refactors
+  05-issues/
+    open/                  ← bugs not yet converted to features
+    closed/
+    deferred/
 run.bash                   ← app's run command
 ```
 
 ## Workflow
 
-1. Fill `02-doc/spec.md` — describe the app
-2. Create feature file `03-features/notdone/F01-slug.md`
-3. Create task file `04-tasks/notdone/TF01-slug.md` (NN matches feature)
+1. Fill `process/02-doc/spec.md` — describe the app
+2. Create feature file `process/03-features/notdone/F01-slug.md`
+3. Create task file `process/04-tasks/notdone/TF01-slug.md` (NN matches feature)
 4. Write code, write tests task by task
 5. `/checkpoint` — review, commit, push
 6. When all tasks done → move task file to `done/`, move feature file to `done/`
