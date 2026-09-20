@@ -9,7 +9,6 @@ LICENSE
 README.md
 .gitignore
 CLAUDE.md
-<<<<<<< HEAD
 process/
   01-literate/
   02-doc/
@@ -33,33 +32,6 @@ process/
     closed/
     deferred/
     template.md
-=======
-Makefile
-01-literate/
-02-doc/
-  spec.md
-  current.md
-  history.md
-  notes.md
-03-features/
-  notdone/
-  done/
-  deferred/
-  template.md
-04-tasks/
-  notdone/
-  done/
-  deferred/
-  chores.md
-  template.md
-05-issues/
-  open/
-  closed/
-  deferred/
-  template.md
-.githooks/
-  pre-commit
->>>>>>> f8ba6a59326580877fae7b0145f2db3cab7929b2
 run.bash
 ```
 ### LICENSE
