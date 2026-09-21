@@ -8,6 +8,7 @@ When bootstrapping a new project, assume that you are inside the directory of th
 LICENSE
 README.md
 .gitignore
+ruff.toml
 CLAUDE.md
 process/
   01-literate/
@@ -42,6 +43,14 @@ Copy from `.claude/templates/README.md.template` and replace `<APP NAME>` and ot
 
 ### .gitignore
 Copy from `.claude/templates/.gitignore.template` as-is.
+
+### ruff.toml
+Copy from `.claude/templates/ruff.toml.template` as-is. This carries over the
+calibrated ruff rule set mapped to `.claude/style_guide.md`'s checklist (see
+the `[ruff: CODE]` markers in that file). Once the new project has real code,
+recalibrate `select` and the `[lint.pylint]` thresholds against what
+`ruff check` actually finds there — the template comments explain what to
+drop and why.
 
 ### CLAUDE.md
 Copy from `.claude/templates/CLAUDE.md.template` and replace `<APP NAME>`.

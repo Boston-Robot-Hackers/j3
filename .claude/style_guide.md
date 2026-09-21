@@ -1,11 +1,17 @@
 # Code Review Checklist
 
-Version: 4.1 — universal Python review guide.
+Version: 4.2 — universal Python review guide.
 
 `MUST` blocks unless waived in the task/PR. `SHOULD` = expected default.
 `CONSIDER` = review prompt, not a mechanical rule. Prefer a linter/type-checker
 for mechanical items (line length, imports, quotes, unused names) and spend
 human review on the judgment items below.
+
+Items marked `[ruff: CODE]` are mechanically checked by `ruff check` per the
+`[tool.ruff.lint]` select list in `pyproject.toml` (or `ruff.toml`) — a clean
+`ruff check` already satisfies them. `[ruff: partial]` means ruff catches
+only part of the rule; the rest still needs manual review. Everything
+unmarked is manual-review only.
 
 ## Process
 - No code without a matching feature + task file; no task file without a feature.
@@ -25,28 +31,31 @@ behavior; if the bad value is ours, fix it at the source.
   branching to "make it work".
 - On a problem, raise with context; never return the bad value or a silent
   fallback; never swallow with `except: return None` / `continue`.
+  `[ruff: partial — S110/S112 catch silent pass/continue, not return None]`
 - Validate once at each boundary (user input, config, hardware, external APIs),
   then trust the value.
-- No bare `except Exception:` or silent `except X: pass`.
+- No bare `except Exception:` or silent `except X: pass`. `[ruff: BLE, S110]`
 - Bug fixes include a regression test unless the case is hardware-only.
 - Persisted-format changes preserve old files or ship migration/defaults.
 
 ## Correctness
 **MUST**
-- No side effects at import time. No mutable default arguments.
+- No side effects at import time. No mutable default arguments. `[ruff: B006 — mutable defaults only]`
 - Keep pure logic free of framework/hardware imports; isolate those in adapters.
 - Runtime-only, hardware, and physical-motion tests are marked manual and kept
   out of the plain test run.
 - No secrets in code or config; sensitive values come from env/untracked config;
-  logs never expose secrets or PII.
+  logs never expose secrets or PII. `[ruff: partial — S105/S106/S107 catch
+  hardcoded password-shaped names only]`
 
 ## Imports & packaging
 **MUST**
 - Absolute imports only; no relative imports; no wildcard or unused imports.
+  `[ruff: TID, F401, F403]`
 - Every `.py` starts with `#!/usr/bin/env python3`.
 
 **SHOULD**
-- All imports at the top, sorted consistently.
+- All imports at the top, sorted consistently. `[ruff: E402, I]`
 - Runtime deps declared in the right package metadata.
 
 ## Naming & style
@@ -87,19 +96,20 @@ What the hook guarantees:
 derived from `git rev-list`/`git log`, because neither follows renames reliably.
 - No `from __future__ import annotations`.
 - No leading-underscore prefix on any custom identifier.
-- Line length <= 88 unless a longer line is materially clearer.
+- Line length <= 88 unless a longer line is materially clearer. `[ruff: E501]`
 - Fields self-explanatory without surrounding code — no bare `xy`/`data`/`info`/
   `params`; spell out the meaning (`world_xy`, `map_data`, `tuning`).
-- f-strings for formatting.
+- f-strings for formatting. `[ruff: partial — UP catches `.format()`/`%`]`
 
 **SHOULD**
-- Double quotes; single only when required.
-- `X | None`, not `Optional[X]`.
+- Double quotes; single only when required. `[ruff format]`
+- `X | None`, not `Optional[X]`. `[ruff: UP007]`
 - Booleans named `is_x` / `has_x` / `can_x`.
 - No single-letter names except loop counters `i`, `j`.
 - Put units in names (`dist_to_robot_m`, `clearance_cells`); document non-obvious
   encodings inline.
 - `is` / `is not` for `None` / `True` / `False`; `enumerate()` over manual counters.
+  `[ruff: SIM — enumerate only]`
 
 ## Design
 Numeric limits below are smells, not laws — they flag a function doing too much,
@@ -110,9 +120,11 @@ not a hard cap.
   beats adding it. No speculative error handling, recovery, defaults, config, or
   abstraction the spec doesn't require; every guard must catch a real, reachable
   case.
-- Functions <= ~50 lines, files <= ~300 lines where practical.
+- Functions <= ~50 lines, files <= ~300 lines where practical. `[ruff: partial —
+  PLR0915 too-many-statements as a proxy]`
 - Avoid if/else nesting > 1 deep and if-chains > 3 branches; extract helpers,
-  return early, or use a lookup table. Extraction for branching or naming beats
+  return early, or use a lookup table. `[ruff: partial — PLR0912
+  too-many-branches, calibrated looser than 3]` Extraction for branching or naming beats
   the "no tiny methods" rule.
 - Avoid 1-2 line methods unless they are properties, protocol/boundary adapters,
   or genuinely improve naming.
@@ -122,6 +134,7 @@ not a hard cap.
 
 **CONSIDER**
 - <= 3 behavioral args; group travelling params into a dataclass/config.
+  `[ruff: partial — PLR0913, calibrated to max-args=5]`
 - Defaults fine in dataclasses/config/CLI/public APIs; avoid hidden behavioral
   defaults in internal logic.
 - Minimal public API; no god methods, feature envy, or unrelated responsibilities
@@ -170,13 +183,14 @@ Applies to any project with a UI layer (Streamlit, Flask, Dash, etc.).
 
 ## Runtime quality
 **MUST**
-- No unreachable/commented-out code, debug prints, or breakpoints.
+- No unreachable/commented-out code, debug prints, or breakpoints. `[ruff: partial
+  — ERA catches commented-out code only]`
 
 **SHOULD**
-- Context managers for files/resources needing cleanup.
+- Context managers for files/resources needing cleanup. `[ruff: SIM]`
 - Logging (not `print`) for runtime errors in library/service modules.
 - No blocking I/O, model loading, or expensive setup in hot loops; avoid repeated
-  large allocations there.
+  large allocations there. `[ruff: PERF]`
 - Optional outputs skip work when no consumer is listening.
 - Use the framework's concurrency model; make shutdown deterministic.
 - Lifecycle components release threads, timers, pub/sub, and hardware cleanly.

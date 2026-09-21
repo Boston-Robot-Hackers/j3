@@ -29,7 +29,7 @@ Claude scaffolds the folder structure, generates starter files, and blocks you f
 | `literate.md` | Generates literate-program Markdown walkthroughs of source files |
 | `commands/start.md` | `/start` — orients Claude at session start |
 | `commands/checkpoint.md` | `/checkpoint` — runs tests, updates docs, commits, pushes |
-| `templates/` | Starter files: LICENSE, README, .gitignore, feature/task/issue templates |
+| `templates/` | Starter files: LICENSE, README, .gitignore, Makefile, ruff.toml, pre-commit hook, feature/task/issue templates |
 
 ## Project structure created by bootstrap
 
