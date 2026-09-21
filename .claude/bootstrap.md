@@ -72,20 +72,6 @@ Executable shell script containing the app's run command; set executable with `c
 ## After scaffolding
 
 Prompt the user to:
-<<<<<<< HEAD
-1. Fill in `process/02-doc/spec.md` with the app description
-2. Initialize `process/02-doc/current.md` as the session handoff file — keep it
-   to just an `## Open` section (what's in progress/next); when work is marked
-   done, move that entry out of `current.md` into `process/02-doc/history.md`
-   rather than letting it accumulate in the always-read file
-3. Create `process/02-doc/history.md` with a one-line header (e.g. "# History")
-   — it starts empty and only grows as work is marked done
-4. Add any durable architecture notes to `process/02-doc/notes.md`
-5. Replace `<APP NAME>` in `CLAUDE.md`, `README.md`, and `LICENSE` with the actual app name, author, and year
-6. Fill in `settings.json`'s `autoMode.environment` block with the real project
-   purpose, package manager, run/test commands, and source control location
-7. Define the first feature and matching task file before writing any code
-=======
 1. Activate the header-stamping hook — a one-time local config, needed once per
    clone, that nothing else will do automatically:
 
@@ -95,18 +81,17 @@ Prompt the user to:
 
    Without it the hook is inert and headers silently stop updating, with no
    error to notice.
-2. Fill in `02-doc/spec.md` with the app description
-3. Initialize `02-doc/current.md` as the session handoff file — keep it to just
-   an `## Open` section (what's in progress/next); when work is marked done,
-   move that entry out of `current.md` into `02-doc/history.md` rather than
-   letting it accumulate in the always-read file
-4. Create `02-doc/history.md` with a one-line header (e.g. "# History") — it
-   starts empty and only grows as work is marked done
-5. Add any durable architecture notes to `02-doc/notes.md`
+2. Fill in `process/02-doc/spec.md` with the app description
+3. Initialize `process/02-doc/current.md` as the session handoff file — keep it
+   to just an `## Open` section (what's in progress/next); when work is marked
+   done, move that entry out of `current.md` into `process/02-doc/history.md`
+   rather than letting it accumulate in the always-read file
+4. Create `process/02-doc/history.md` with a one-line header (e.g. "# History")
+   — it starts empty and only grows as work is marked done
+5. Add any durable architecture notes to `process/02-doc/notes.md`
 6. Replace `<APP NAME>` in `CLAUDE.md`, `README.md`, `Makefile`, and `LICENSE`
    with the actual app name, author, and year
 7. Fill in `settings.json`'s `autoMode.environment` block with the real project
    purpose, package manager, the `make test`/`make run` commands, and source
    control location
 8. Define the first feature and matching task file before writing any code
->>>>>>> f8ba6a59326580877fae7b0145f2db3cab7929b2

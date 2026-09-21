@@ -40,7 +40,7 @@ def staged_python_files() -> list[str]:
     return [line for line in out.splitlines() if line.endswith(".py")]
 
 
-def find_field(lines: list[str], name: str) -> tuple[int, str] | None:
+def find_field(lines: list[str], name: str) -> "tuple[int, str] | None":
     """Return (index, captured value) for a header field, or None if absent."""
     for i, line in enumerate(lines[:HEADER_SCAN_LINES]):
         match = FIELD_RES[name].match(line)
@@ -49,7 +49,7 @@ def find_field(lines: list[str], name: str) -> tuple[int, str] | None:
     return None
 
 
-def find_author_index(lines: list[str]) -> int | None:
+def find_author_index(lines: list[str]) -> "int | None":
     for i, line in enumerate(lines[:HEADER_SCAN_LINES]):
         if AUTHOR_RE.match(line):
             return i
