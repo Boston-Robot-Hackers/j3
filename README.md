@@ -25,7 +25,7 @@ Claude scaffolds the folder structure, generates starter files, and blocks you f
 |---|---|
 | `bootstrap.md` | Scaffold instructions — run once on a new project |
 | `process.md` | Workflow rules: spec → feature → task → code → test |
-| `style_guide.md` | Python coding standards, style rules, review checklist (v4.1) |
+| `style_guide.md` | Python coding standards, style rules, review checklist (v4.3) |
 | `literate.md` | Generates literate-program Markdown walkthroughs of source files |
 | `commands/start.md` | `/start` — orients Claude at session start |
 | `commands/checkpoint.md` | `/checkpoint` — runs tests, updates docs, commits, pushes |
