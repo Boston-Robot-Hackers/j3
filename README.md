@@ -27,8 +27,10 @@ Claude scaffolds the folder structure, generates starter files, and blocks you f
 | `process.md` | Workflow rules: spec → feature → task → code → test |
 | `style_guide.md` | Python coding standards, style rules, review checklist (v4.3) |
 | `literate.md` | Generates literate-program Markdown walkthroughs of source files |
-| `commands/start.md` | `/start` — orients Claude at session start |
-| `commands/checkpoint.md` | `/checkpoint` — runs tests, updates docs, commits, pushes |
+| `commands/` | Slash commands — see [Slash commands](#slash-commands) |
+| `agents/` | Subagents by model tier: `explorer` (haiku), `reviewer` (sonnet), `architect` (opus) |
+| `hooks/` | `block-secrets.sh` blocks writes to credential files; `post-edit-ruff.sh` runs ruff on each edited `.py`; `session-start-context.sh` surfaces `current.md` at session start |
+| `settings.json` | Permissions, deny list, and hook wiring |
 | `templates/` | Starter files: LICENSE, README, .gitignore, Makefile, ruff.toml, pre-commit hook, feature/task/issue templates |
 
 ## Project structure created by bootstrap
@@ -77,19 +79,26 @@ process/
 
 | Command | What it does |
 |---|---|
+| `/bootstrap` | Scaffolds a new project from `.claude/bootstrap.md` and the templates |
 | `/start` | Reads current status, open features, open tasks — orients Claude at session start |
+| `/feature <desc>` | Creates a feature file and its matching task file, then stops for approval |
+| `/close-feature <NN>` | Verifies tasks done and tests passing, then moves feature + task files to `done/` |
 | `/checkpoint` | Runs tests, regenerates literate docs, commits, pushes |
 
 ## Propagating updates to child projects
 
-Projects that copy `.claude/` from j3 will drift over time. When j3 changes, sync key files:
+Projects that copy `.claude/` from j3 will drift over time. When j3 changes, re-copy the whole kit rather than cherry-picking files:
 
 ```bash
-cp j3/.claude/style_guide.md myproject/.claude/style_guide.md
-cp j3/.claude/process.md myproject/.claude/process.md
-cp j3/.claude/templates/feature-template.md myproject/.claude/templates/feature-template.md
-cp j3/.claude/templates/task_template.md myproject/.claude/templates/task_template.md
+mv myproject/.claude myproject/.claude.old
+rsync -a --exclude settings.local.json j3/.claude/ myproject/.claude/
+[ -f myproject/.claude.old/settings.local.json ] && \
+  cp myproject/.claude.old/settings.local.json myproject/.claude/
 ```
+
+Then re-apply that project's own `settings.json` permissions and `autoMode` block from `.claude.old/settings.json` — those are project-specific, not part of the kit — and delete `.claude.old`. j3's `settings.local.json` is never copied; it is machine-local.
+
+Kit changes can also affect files bootstrap already generated (e.g. the Makefile rules in style guide v4.3). Check the project's `Makefile`, `CLAUDE.md`, and `README.md` against the current templates.
 
 ## License
 
