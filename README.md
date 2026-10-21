@@ -57,7 +57,6 @@ process/
     open/                  ← bugs not yet converted to features
     closed/
     deferred/
-run.bash                   ← app's run command
 ```
 
 ## Workflow
