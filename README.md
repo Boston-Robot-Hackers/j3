@@ -45,6 +45,7 @@ process/
   02-doc/
     spec.md                ← describe what your app does here
     current.md             ← session handoff: what's in progress
+    history.md             ← completed work moved out of current.md
     notes.md               ← architecture decisions, research, gotchas
   03-features/
     notdone/               ← FNN-slug.md mini-specs
