@@ -18,7 +18,6 @@
 # tasks
 * Full task list before any design/code. `TFNN-<slug>.md` (`NN` matches the feature) in `process/04-tasks/{notdone,done,deferred}/`; `template.md` shows the format.
 * Each step is numbered `TFNN.N`, matching the file's own `TFNN` (e.g. `TF03.0`, `TF03.1`, ...), starting at `.0` — not a bare `T0N`.
-* `Date Created:` in the header, absolute ISO `YYYY-MM-DD`, set when the file is first written and never changed afterwards. It is the task file's own creation date, which may be later than its feature's.
 * Every step gets a test where feasible (else record why); every feature gets a dedicated test-writing task.
 * Task lists must never include a "regenerate literate docs" task — literate docs are refreshed later, at checkpoint, not as part of a feature's task list.
 * Last task done → move the task file to `done/`, set the feature's Done/Tests Written/Test Passing to yes, move the feature file to `done/`.
