@@ -39,6 +39,6 @@
 * `.claude/bootstrap.md` is the scaffold spec. Run `/bootstrap` to bootstrap a new project — don't follow it ad hoc from a mention in conversation.
 
 # github
-* Literate docs: apply `.claude/literate.md`'s prompt to each changed Python module, save as `01-literate/<module>.md`.
+* Literate docs: apply `.claude/literate.md`'s prompt to each changed source module (Python, JavaScript, or other), save as `01-literate/<module>.md`.
 * Run tests and regenerate literate docs before committing/pushing.
 * Commit or push only when asked, with a good message.
