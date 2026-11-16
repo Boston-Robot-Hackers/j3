@@ -1,6 +1,6 @@
 # Code Review Checklist
 
-Version: 4.3 — universal Python review guide.
+Version: 4.4 — universal Python review guide.
 
 `MUST` blocks unless waived in the task/PR. `SHOULD` = expected default.
 `CONSIDER` = review prompt, not a mechanical rule. Prefer a linter/type-checker
@@ -173,6 +173,10 @@ Applies to any project with a UI layer (Streamlit, Flask, Dash, etc.).
   precise collection types only when they prevent caller ambiguity.
 
 ## Tests
+**MUST**
+- Never assert the wording of an English sentence (captions, notes, messages);
+  assert the values in it or the behavior, e.g. `assert at.info`, not its text.
+
 **SHOULD**
 - Every public method has a test where practical; cover edge cases (empty, `None`,
   boundaries).
@@ -183,8 +187,8 @@ Applies to any project with a UI layer (Streamlit, Flask, Dash, etc.).
 
 ## Runtime quality
 **MUST**
-- No unreachable/commented-out code, debug prints, or breakpoints. `[ruff: partial
-  — ERA catches commented-out code only]`
+- No unreachable/commented-out code, debug prints, or breakpoints. (Manual: ruff's
+  ERA is off because it misreads the stamped header lines as code.)
 
 **SHOULD**
 - Context managers for files/resources needing cleanup. `[ruff: SIM]`
@@ -200,10 +204,10 @@ Applies to any project with a UI layer (Streamlit, Flask, Dash, etc.).
 **MUST**
 - Every project has a Makefile, with `make help` as the default target giving
   a short list of targets.
-- **The Makefile is for the user of the tool only.** It holds the commands a
-  user runs (e.g. `validate`, `copy`, `deploy`, `reset`) — never development or
-  build commands (`setup`, `fmt`, `lint`, `test`). Those run through `uv`
-  directly and are documented in `CLAUDE.md`'s `## Commands`.
+- The Makefile holds the commands a user of the tool runs (e.g. `validate`,
+  `copy`, `deploy`, `reset`). It may also hold development targets (`test`,
+  `fmt`, `lint`), e.g. when a user-facing target or a scheduled job depends on
+  them; the `uv` commands in `CLAUDE.md`'s `## Commands` remain the reference.
 - No `run.bash` or other wrapper script for running the app; a Makefile target
   is the entry point.
 - Every target carries a `## description` comment on its rule line; that is

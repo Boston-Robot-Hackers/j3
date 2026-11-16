@@ -14,7 +14,6 @@ select = [
     "B",      # flake8-bugbear (mutable defaults, common bug patterns)
     "BLE",    # flake8-blind-except (bare/overly-broad except)
     "I",      # isort (import sorting)
-    "ERA",    # eradicate (commented-out code)
     "UP",     # pyupgrade (Optional[X] -> X | None, .format() -> f-string, etc.)
     "SIM",    # flake8-simplify (enumerate(), context managers, etc.)
     "TID",    # flake8-tidy-imports (relative imports, banned-api)
@@ -26,6 +25,9 @@ select = [
     "PLR0915",  # too-many-statements (proxy for function length)
 ]
 # Not selected by default — revisit per project:
+# - ERA (eradicate): dropped. It flags the hook-stamped `# Version:` and
+#   `# Updated:` header lines in every file; commented-out code is a review
+#   item in the style guide instead.
 # - ANN (flake8-annotations): only turn on if the project commits to type
 #   hints project-wide. On an intentionally unannotated codebase this can
 #   raise hundreds of findings, so it's dropped rather than adopted

@@ -1,7 +1,8 @@
 # Makefile — commands for using <APP NAME>
 #
-# Only tool targets live here: what a user of the app runs. Development
-# commands (sync, tests, ruff) run through `uv` directly; see CLAUDE.md.
+# Mainly tool targets: what a user of the app runs. Development commands
+# (sync, tests, ruff) run through `uv` directly (see CLAUDE.md); add targets
+# for them only when something depends on them.
 
 .PHONY: help
 
