@@ -5,12 +5,9 @@ Feature file name must be `FNN-<slug>.md` where `NN` matches the feature number.
 # Fxx — description
 
 **Priority**: High | Medium | Low
-<<<<<<< HEAD:.claude/templates/feature-template.md
 
 **Date Created:** YYYY-MM-DD
 
-=======
->>>>>>> 09439df5543f6021887b5ba14b9733a17d5679b5:.claude/templates/feature_template.md
 **Done:** yes | no
 
 **Tasks File Created:** yes | no
