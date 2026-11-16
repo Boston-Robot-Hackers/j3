@@ -18,7 +18,6 @@ Feature file name must be `FNN-<slug>.md` where `NN` matches the feature number.
 
 **Description**: description here.
 
-
 ## How to Demo
 
 **Setup**: what must be running or configured before the demo.
