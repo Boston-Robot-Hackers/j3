@@ -21,6 +21,7 @@
 # features
 * `FNN-<slug>.md` in `process/03-features/{notdone,done,deferred}/`; a mini-spec — scope/intent, not task detail.
 * `Tasks File Created: yes` only once a matching `process/04-tasks/TFNN-*.md` exists. `template.md` shows the format.
+* `Date Created:` in the header, absolute ISO `YYYY-MM-DD`, set when the file is first written and never changed afterwards — not even when the feature moves between `notdone`/`done`/`deferred`.
 
 # tasks
 * Full task list before any design/code. `TFNN-<slug>.md` (`NN` matches the feature) in `process/04-tasks/{notdone,done,deferred}/`; `template.md` shows the format.
